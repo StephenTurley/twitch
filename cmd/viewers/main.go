@@ -31,21 +31,19 @@ func main() {
 	defer resp.Body.Close()
 
 	type StreamInfo struct {
-		user_login   string
-		viewer_count int
+		ViewerCount int `json:"viewer_count"`
 	}
 	var response struct {
-		data []interface{}
+		Data []StreamInfo `json:"data"`
 	}
 
 	err = json.NewDecoder(resp.Body).Decode(&response)
-	// data, err := ioutil.ReadAll(resp.Body)
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	fmt.Println(response)
+	count := response.Data[0].ViewerCount
 
-	fmt.Println("VIEWERS:0")
+	fmt.Printf("VIEWERS:%d\n", count)
 }

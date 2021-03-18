@@ -43,7 +43,10 @@ func main() {
 		log.Fatal(err)
 	}
 
-	count := response.Data[0].ViewerCount
+	count := 0
+	if len(response.Data) > 0 {
+		count = response.Data[0].ViewerCount
+	}
 
 	fmt.Printf("VIEWERS:%d\n", count)
 }
